@@ -1,11 +1,7 @@
-#!/usr/bin/env python3
-# Copyright 2022 Tony Akocs
-# SPDX-License-Identifier: MIT
 import argparse
-import os
 from typing import Sequence
-
 import yaml
+import os
 
 """
 This file will compare two YAML files, where --file1 is the developers configuration
@@ -14,11 +10,11 @@ the sample configuration file that does get checked into GIT. There is also a di
 parameter, --dir, that is also passed just in-case your config files are in a directory.
 If your config files are at the top of the directory structure just pass in blank
 
-- repo: https://github.com/akocs/configcompare
+- repo: https://github.com/akocs/config-compare
     rev: main
     hooks:
-      - id: configcompare
-        name: configcompare
+      - id: config-compare
+        name: config-compare
         description: Compare the projects sample config keys to developers config file
         language: python
         language_version: 3.8.6
@@ -34,8 +30,8 @@ or to run it locally from the .git/hooks directory
 
  - repo: local
     hooks:
-      - id: configcompare
-        name: configcompare
+      - id: config-compare
+        name: config-compare
         description: Compare the projects sample config keys to developers config file
         language: python
         language_version: 3.8.6
@@ -50,10 +46,9 @@ or to run it locally from the .git/hooks directory
 
 """
 
-def __loadConfigFile(directory: str, fileName: str) -> dict:
+def __loadConfigFile(directory: str, fileName: str) -> list:
     # Get current working directory
     cwd = os.getcwd()
-    print(f"PATH: {cwd}")
     keys = []
     if directory != "":
         localFileName = cwd + "/" + directory + "/" + fileName
@@ -68,15 +63,15 @@ def __loadConfigFile(directory: str, fileName: str) -> dict:
             print(exc)
     return keys
 
-def __compareList(l1,l2) -> bool:
-   l1.sort()
-   l2.sort()
-   if (l1 == l2):
-      return True
-   else:
-      return False
-
-def parse_arguments():
+def __checkIfEqual(l1: list, l2: list) -> bool:
+    l1.sort()
+    l2.sort()
+    if (l1 == l2):     
+        return True
+    else:
+        return False        
+  
+def __parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--dir', type=str, default='',
@@ -94,27 +89,21 @@ def parse_arguments():
     parser.add_argument('files', nargs=argparse.REMAINDER)
     return parser.parse_args()
 
-
-def main() -> int:
-    args = parse_arguments()
+def main(argv: Sequence[str] = None) -> int:
+    args = __parse_arguments()
     directory = args.dir
     configFile = args.file1
     configSampleFile = args.file2
-    configKeys = []
-    configSampleKeys = []
     configKeys = __loadConfigFile(directory, configFile)
     configSampleKeys = __loadConfigFile(directory, configSampleFile)
 
-    if (__compareList(configKeys, configSampleKeys)):
+    isEqual = __checkIfEqual(configKeys, configSampleKeys)
+    if (isEqual):
         print("Config files are same")
     else:
-        print(
-            f"Missing values in {configSampleFile} missing:", (
-            set(configKeys).difference(configSampleKeys)
-            ),
-        )
+        missing = set(configKeys).difference(configSampleKeys)
+        print(f"Missing values in {configSampleFile}: {missing}")
         return 1
 
-if __name__ == '__main__':
-    print("IN CONFIG COMPARE")
+if __name__ == "__main__":
     raise SystemExit(main())
