@@ -36,19 +36,14 @@ config.yaml file. An error will be thrown.
 ## To Run:
 
 ```bash
-# run on all files in current directory
+# run in current directory
 config-compare
 # config-compare --file1 "config.yaml" --file2 "config-sample.yaml"
+
+# run where the config files are in a directory (ex: deployment)
+# config-compare --dir "deployment" --file1 "config.yaml" --file2 "config-sample.yaml"
 ```
 
-or
-
-```bash
-# run on a specific set of files
-config-compare file1 "config.yaml" file2 "config-sample.yaml"
-```
-
-`config-compare --file1 "config.yaml" --file2 "config-sample.yaml"`
 
 ## pre-commit
 If you want to run it from Github use this configuration
