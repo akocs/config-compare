@@ -9,7 +9,7 @@ If you are on a project where there is a config-sample.yaml file that contains e
 configurations for the project in YAML format. When a developer wants to run the project
 they will just copy the config-sample.yaml file and rename it to config.yaml. They can
 run the project using their own custom project configurations using  the config.yaml file.
-The config-sample.yaml file is always checked in to the reposistory but the developers 
+The config-sample.yaml file is always checked in to the repository but the developer's 
 custom config.yaml file is never checked into the repository.
 
 When a developer makes a change to the application and adds a new key/value pair to their 
@@ -18,15 +18,15 @@ they check all their changes into the repo. You then pull down their changes and
 the application. You will get an error that says something like 'unknown property' or
 'property not found' error. 
 
-To solve this you can use config-compare pre-commit hook.
+To solve this, you can use config-compare pre-commit hook.
 
 # Description:
 This pre-commit hook will compare two YAML configuration files. It will compare the 
-develops custom config.yaml file to the projects config-sample.yaml file. If the 
+develops custom config.yaml file to the project's config-sample.yaml file. If the 
 config-sample.yaml file does not contain a key/value pair that is in the developers
 config.yaml file. An error will be thrown. 
 
-### Parameters
+## Parameters
 | Command Line    | Input                   | Description                                                    |
 | --------------- | ----------------------- | -------------------------------------------------------------- |
 | --dir           |  String directory name  | Directory that the config files are located if ther is one     |
