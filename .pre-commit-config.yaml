@@ -15,3 +15,15 @@ repos:
     hooks:
       - id: reorder-python-imports
         args: [--py3-plus]
+  - repo: https://github.com/akocs/config-compare
+    rev: main
+    hooks:
+      - id: config-compare
+        additional_dependencies: [pyyaml]
+        always_run: true
+        args:
+          [
+            "--dir=deployment",
+            "--file1=config.yaml",
+            "--file2=config-sample.yaml",
+          ]
