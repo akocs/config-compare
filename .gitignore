@@ -4,3 +4,8 @@ develop-eggs/
 dist/
 *.egg-info/
 version.txt
+
+# test files and directory
+config-sample.yaml
+config.yaml
+deployment/
