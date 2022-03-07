@@ -28,7 +28,7 @@ config.yaml file. An error will be thrown.
 ## Parameters
 | Command Line    | Input                   | Description                                                    |
 | --------------- | ----------------------- | -------------------------------------------------------------- |
-| --dir           |  String directory name  | (optional) Directory that the config files are located if ther is one     |
+| --dir           |  String directory name  | (optional) Directory that the config files are located (ex: deployment or code/deployment) |
 | --file1         |  String file name       | The developers custom config file (example: config.yaml)       |
 | --file2         |  String file name       | The project sample config file (example: config-sample.yaml)   |
 
