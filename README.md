@@ -3,27 +3,26 @@ Copyright 2022 Tony Akocs
 SPDX-License-Identifier: MIT
 -->
 # config-compare
+This pre-commit hook prevents commits when the specified YAML files contain different key values.
 
-## Backgroud:
-If you are on a project where there is a config-sample.yaml file that contains example 
-configurations for the project in YAML format. When a developer wants to run the project
-they will just copy the config-sample.yaml file and rename it to config.yaml. They can
-run the project using their own custom project configurations using  the config.yaml file.
-The config-sample.yaml file is always checked in to the repository but the developer's 
-custom config.yaml file is never checked into the repository.
+## Background:
+If you're working on a project with a config-sample.yaml file that contains YAML-formatted
+example configurations for the project. When a developer wants to run the project,
+they just copy and change the config-sample.yaml file to config.yaml. They can use
+the config.yaml file to build the project with their own specific project configurations.
+The developer's custom config.yaml file is never checked into the repository, 
+but the config-sample.yaml file is always checked into the repository.
 
-When a developer makes a change to the application and adds a new key/value pair to their 
-config.yaml file. Sometimes they forget to add it to the config-sample.yaml file. Then
-they check all their changes into the repo. You then pull down their changes and build
-the application. You will get an error that says something like 'unknown property' or
-'property not found' error. 
-
-To solve this, you can use config-compare pre-commit hook.
+When a developer makes an application change and updates the config.yaml file with a 
+new key value. They often neglect to include it in the config-sample.yaml file. 
+Following that, they commit all of their changes to the repository. Then you pull 
+down their changes and build the application. You will get an error message that says 
+"unknown property" or "property not found".
 
 # Description:
 This pre-commit hook will compare two YAML configuration files. It will compare the 
 develops custom config.yaml file to the project's config-sample.yaml file. If the 
-config-sample.yaml file does not contain a key/value pair that is in the developers
+config-sample.yaml file does not contain a key value that is in the developers
 config.yaml file. An error will be thrown. 
 
 ## Parameters
