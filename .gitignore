@@ -4,6 +4,7 @@ develop-eggs/
 dist/
 *.egg-info/
 version.txt
+.vscode/
 
 # test files and directory
 config-sample.yaml
